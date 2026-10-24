@@ -1,0 +1,150 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Femboy VPN API",
+    "description": "Public pricing endpoint of the Femboy VPN subscription service (femboyvpn.connecto.lol). Knowledge source: the community Swift client https://github.com/l0v3m0n3y/femboyvpn (src/femboyvpn.swift), with the endpoint probed live on 2026-10-23. The client also wraps account, quote, payment and operation-status calls (/auth/*, /me/*, /operations/{id}); those are POST calls or require a logged-in session cookie, so they are deliberately left out. Only GET /public/tariffs works without an account. Unverified: the meaning of `mode` and `version` beyond the observed values (\"production\", 1); whether `items` is always the 3-device subset of `packages` as observed; any rate limit (none documented). Prices are decimal strings in RUB as served.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://github.com/l0v3m0n3y/femboyvpn"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://femboyvpn.connecto.lol/v1",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/public/tariffs": {
+      "get": {
+        "summary": "Get the subscription tariffs",
+        "description": "Returns the public price list: subscription packages by term (months) and device count, the per-additional-device price and the device cap.",
+        "operationId": "getTariff",
+        "responses": {
+          "200": {
+            "description": "The current tariff sheet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tariff"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Tariff": {
+        "type": "object",
+        "description": "The public tariff sheet.",
+        "properties": {
+          "additional_device": {
+            "type": "string",
+            "description": "Price of one additional device, as a decimal string (observed \"25\")."
+          },
+          "items": {
+            "type": "array",
+            "description": "Headline packages (observed: the 3-device packages for 1, 3, 6 and 12 months).",
+            "items": {
+              "$ref": "#/components/schemas/TariffPackage"
+            }
+          },
+          "max_devices": {
+            "type": "integer",
+            "description": "Maximum number of devices per subscription."
+          },
+          "mode": {
+            "type": "string",
+            "description": "Service mode (observed \"production\")."
+          },
+          "packages": {
+            "type": "array",
+            "description": "Every package: each term (1, 3, 6, 12 months) for each device tier (3, 5, 10, 15 observed).",
+            "items": {
+              "$ref": "#/components/schemas/TariffPackage"
+            }
+          },
+          "version": {
+            "type": "integer",
+            "description": "Tariff sheet version (observed 1)."
+          }
+        },
+        "required": [
+          "additional_device",
+          "items",
+          "max_devices",
+          "mode",
+          "packages",
+          "version"
+        ],
+        "example": {
+          "additional_device": "25",
+          "items": [
+            {
+              "amount": "300",
+              "currency": "RUB",
+              "days": 30,
+              "devices": 3,
+              "months": 1
+            }
+          ],
+          "max_devices": 100,
+          "mode": "production",
+          "packages": [
+            {
+              "amount": "300",
+              "currency": "RUB",
+              "days": 30,
+              "devices": 3,
+              "months": 1
+            },
+            {
+              "amount": "350",
+              "currency": "RUB",
+              "days": 30,
+              "devices": 5,
+              "months": 1
+            }
+          ],
+          "version": 1
+        }
+      },
+      "TariffPackage": {
+        "type": "object",
+        "description": "One purchasable subscription package.",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "description": "Price as a decimal string, e.g. \"300\"."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code (observed \"RUB\")."
+          },
+          "days": {
+            "type": "integer",
+            "description": "Term length in days (30 per month)."
+          },
+          "devices": {
+            "type": "integer",
+            "description": "Number of devices included."
+          },
+          "months": {
+            "type": "integer",
+            "description": "Term length in months."
+          }
+        },
+        "required": [
+          "amount",
+          "currency",
+          "days",
+          "devices",
+          "months"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+# Entity: tariff
+
+main: kit: entity: tariff: {
+
+  alias: field: {}
+
+  fields: {
+    additional_device: {
+      h: "Additional Device"
+      n: "additional_device"
+      r: true
+      sh: "Price of one additional device, as a decimal string (observed \"25\")."
+      t: "`$STRING`"
+    }
+    items: {
+      h: "Items"
+      n: "items"
+      r: true
+      sh: "Headline packages (observed: the 3-device packages for 1, 3, 6 and 12 months)."
+      t: "`$ARRAY`"
+    }
+    max_devices: {
+      h: "Max Devices"
+      n: "max_devices"
+      r: true
+      sh: "Maximum number of devices per subscription."
+      t: "`$INTEGER`"
+    }
+    mode: {
+      h: "Mode"
+      n: "mode"
+      r: true
+      sh: "Service mode (observed \"production\")."
+      t: "`$STRING`"
+    }
+    packages: {
+      h: "Packages"
+      n: "packages"
+      r: true
+      sh: "Every package: each term (1, 3, 6, 12 months) for each device tier (3, 5, 10, 15 observed)."
+      t: "`$ARRAY`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: true
+      sh: "Tariff sheet version (observed 1)."
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "tariff"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /public/tariffs"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/public/tariffs"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "public"
+            }
+            {
+              lit: "tariffs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

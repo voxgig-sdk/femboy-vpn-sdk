@@ -1,0 +1,22 @@
+# BasicTariffFlow
+
+main: kit: flow: BasicTariffFlow:
+{
+  entity: "tariff",
+  kind: "basic",
+  name: "BasicTariffFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "tariff_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTariffFlow"
+}

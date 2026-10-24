@@ -1,0 +1,49 @@
+{
+  "existing": {
+    "tariff": {
+      "TARIFF00": {
+        "additional_device": "s3c",
+        "items": [],
+        "max_devices": 62,
+        "mode": "s3f",
+        "packages": [],
+        "version": 65
+      },
+      "TARIFF01": {
+        "additional_device": "s78",
+        "items": [],
+        "max_devices": 122,
+        "mode": "s7b",
+        "packages": [],
+        "version": 125
+      },
+      "TARIFF02": {
+        "additional_device": "sb4",
+        "items": [],
+        "max_devices": 182,
+        "mode": "sb7",
+        "packages": [],
+        "version": 185
+      }
+    }
+  },
+  "new": {
+    "tariff": {
+      "tariff_ref01": {
+        "additional_device": "sf0",
+        "items": [],
+        "max_devices": 242,
+        "mode": "sf3",
+        "packages": [],
+        "version": 245
+      }
+    }
+  },
+  "requests": {
+    "GET /public/tariffs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

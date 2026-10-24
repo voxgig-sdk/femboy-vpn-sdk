@@ -1,0 +1,25 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      auth: false
+      contact: {
+        url: "https://github.com/l0v3m0n3y/femboyvpn"
+      }
+      description: "Public pricing endpoint of the Femboy VPN subscription service (femboyvpn.connecto.lol). Knowledge source: the community Swift client https://github.com/l0v3m0n3y/femboyvpn (src/femboyvpn.swift), with the endpoint probed live on 2026-10-23. The client also wraps account, quote, payment and operation-status calls (/auth/*, /me/*, /operations/{id}); those are POST calls or require a logged-in session cookie, so they are deliberately left out. Only GET /public/tariffs works without an account. Unverified: the meaning of `mode` and `version` beyond the observed values (\"production\", 1); whether `items` is always the 3-device subset of `packages` as observed; any rate limit (none documented). Prices are decimal strings in RUB as served."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://femboyvpn.connecto.lol/v1"
+        }
+      ]
+      summary: "Public pricing endpoint of the Femboy VPN subscription service (femboyvpn.connecto.lol)."
+      title: "Femboy VPN API"
+      version: "1.0.0"
+      website: "https://femboyvpn.connecto.lol"
+    }
+  }
+}
+

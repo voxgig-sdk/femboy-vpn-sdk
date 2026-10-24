@@ -1,0 +1,19 @@
+{
+  "files": [
+    "SUMMARY.md"
+  ],
+  "config": ".sdk/doc/qa/vale.ini",
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Every package: each term (1, 3, 6, 12 months) for each device tier (3, 5, 10, 15 observed).",
+      "Headline packages (observed: the 3-device packages for 1, 3, 6 and 12 months).",
+      "Maximum number of devices per subscription.",
+      "Price of one additional device, as a decimal string (observed &quot;25&quot;).",
+      "Production server",
+      "Public pricing endpoint of the Femboy VPN subscription service (`femboyvpn.connecto.lol`). Knowledge source: the community Swift client https://github.com/l0v3m0n3y/femboyvpn (src/femboyvpn.swift), with the endpoint probed live on 2026-10-23. The client also wraps account, quote, payment and operation-status calls (/auth/*, /me/*, /operations/&#123;id&#125;); those are POST calls or require a logged-in session cookie, so they are deliberately left out. Only GET /public/tariffs works without an account. Unverified: the meaning of `mode` and `version` beyond the observed values (&quot;production&quot;, 1); whether `items` is always the 3-device subset of `packages` as observed; any rate limit (none documented). Prices are decimal strings in RUB as served.",
+      "Service mode (observed &quot;production&quot;).",
+      "The current tariff sheet"
+    ]
+  }
+}
